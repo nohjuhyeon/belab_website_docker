@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  fastapi-app:
+    image: fastapi-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env  # 환경 변수 파일에서 MongoDB Atlas URI 및 기타 설정 로드
+    networks:
+      - app-network
+    ports:
+      - "8000:8000"  # FastAPI 앱의 포트를 로컬에 노출
+
+networks:
+  app-network:
+    driver: bridge
